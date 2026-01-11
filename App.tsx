@@ -128,44 +128,46 @@ const FullScreenPromptViewer: React.FC<ModalProps> = ({ prompt, onClose, onCopy,
   }, [prompt]);
 
   return (
-    <div style={fullScreenOverlayStyle}>
-      <div style={{ ...viewerHeaderStyle, borderBottom: `4px solid ${activeColor}` }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <button onClick={onClose} style={viewerBackBtnStyle} title="Back to Archive">
-            <i className="fas fa-arrow-left"></i>
-          </button>
-          <div style={{ borderLeft: '2px solid #e2e8f0', paddingLeft: '20px' }}>
-            <h2 style={{ fontSize: '1.4rem', margin: 0, fontWeight: 800, color: '#0f172a' }}>
-              {prompt.isHidden && <i className="fas fa-eye-slash" style={{ marginRight: '10px', color: '#64748b', fontSize: '1.1rem' }}></i>}
-              {prompt.name}
-            </h2>
-            <div style={{ fontSize: '0.8rem', color: '#64748b', textTransform: 'uppercase', letterSpacing: '1.5px', fontWeight: 700, marginTop: '2px' }}>
-              <span style={{ color: activeColor }}>{prompt.category}</span> • SECURE RECORD
-            </div>
-          </div>
-        </div>
-        <div style={{ display: 'flex', gap: '15px' }}>
-          <button onClick={() => onCopy(content)} style={{ ...viewerCopyBtnStyle, background: activeColor }}>
-            <i className="fas fa-copy"></i> Copy Content
-          </button>
-        </div>
-      </div>
-      <div style={viewerBodyLayoutStyle}>
-        <div style={viewerMainContentStyle}>
-          {loading ? (
-            <div style={viewerLoadingIndicatorStyle}>
-              <i className="fas fa-spinner fa-spin" style={{ fontSize: '2rem', color: activeColor }}></i>
-              <p style={{ marginTop: '15px', fontWeight: 600 }}>Decrypting Secure Record...</p>
-            </div>
-          ) : (
-            <div style={contentWrapperStyle}>
-              <MarkdownContent content={content} accentColor={activeColor} />
-              <div style={{ marginTop: '80px', paddingTop: '40px', borderTop: '1px solid #e2e8f0', textAlign: 'center', color: '#94a3b8', fontSize: '0.9rem' }}>
-                <i className="fas fa-shield-halved" style={{ marginRight: '8px', color: activeColor }}></i>
-                This record is protected by Vault Protocol 7. Unauthorized duplication is logged.
+    <div style={modalOverlayStyle} onClick={(e) => e.target === e.currentTarget && onClose()}>
+      <div style={{ ...modalContentStyle, height: '90vh', maxWidth: '1000px', width: '90%' }}>
+        <div style={{ ...viewerHeaderStyle, borderBottom: `4px solid ${activeColor}`, borderRadius: '12px 12px 0 0' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+            <button onClick={onClose} style={viewerBackBtnStyle} title="Close Viewer">
+              <i className="fas fa-times"></i>
+            </button>
+            <div style={{ borderLeft: '2px solid #e2e8f0', paddingLeft: '20px' }}>
+              <h2 style={{ fontSize: '1.4rem', margin: 0, fontWeight: 800, color: '#0f172a' }}>
+                {prompt.isHidden && <i className="fas fa-eye-slash" style={{ marginRight: '10px', color: '#64748b', fontSize: '1.1rem' }}></i>}
+                {prompt.name}
+              </h2>
+              <div style={{ fontSize: '0.8rem', color: '#64748b', textTransform: 'uppercase', letterSpacing: '1.5px', fontWeight: 700, marginTop: '2px' }}>
+                <span style={{ color: activeColor }}>{prompt.category}</span> • SECURE RECORD
               </div>
             </div>
-          )}
+          </div>
+          <div style={{ display: 'flex', gap: '15px' }}>
+            <button onClick={() => onCopy(content)} style={{ ...viewerCopyBtnStyle, background: activeColor }}>
+              <i className="fas fa-copy"></i> Copy Content
+            </button>
+          </div>
+        </div>
+        <div style={{ ...viewerBodyLayoutStyle, background: '#fff' }}>
+          <div style={{ ...viewerMainContentStyle, boxShadow: 'none', padding: '40px', borderRadius: '0', minHeight: 'auto', maxWidth: '100%' }}>
+            {loading ? (
+              <div style={viewerLoadingIndicatorStyle}>
+                <i className="fas fa-spinner fa-spin" style={{ fontSize: '2rem', color: activeColor }}></i>
+                <p style={{ marginTop: '15px', fontWeight: 600 }}>Decrypting Secure Record...</p>
+              </div>
+            ) : (
+              <div style={contentWrapperStyle}>
+                <MarkdownContent content={content} accentColor={activeColor} />
+                <div style={{ marginTop: '80px', paddingTop: '40px', borderTop: '1px solid #e2e8f0', textAlign: 'center', color: '#94a3b8', fontSize: '0.9rem' }}>
+                  <i className="fas fa-shield-halved" style={{ marginRight: '8px', color: activeColor }}></i>
+                  This record is protected by Vault Protocol 7. Unauthorized duplication is logged.
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
