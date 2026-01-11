@@ -130,12 +130,12 @@ const FullScreenPromptViewer: React.FC<ModalProps> = ({ prompt, onClose, onCopy,
   return (
     <div style={modalOverlayStyle} onClick={(e) => e.target === e.currentTarget && onClose()}>
       <div style={{ ...modalContentStyle, height: '90vh', maxWidth: '1000px', width: '90%' }}>
-        <div style={{ ...viewerHeaderStyle, borderBottom: `4px solid ${activeColor}`, borderRadius: '12px 12px 0 0' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+        <div className="viewer-header" style={{ borderBottomColor: activeColor }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px', width: '100%' }}>
             <button onClick={onClose} style={viewerBackBtnStyle} title="Close Viewer">
               <i className="fas fa-times"></i>
             </button>
-            <div style={{ borderLeft: '2px solid #e2e8f0', paddingLeft: '20px' }}>
+            <div className="viewer-title-group" style={{ borderLeft: '2px solid #e2e8f0', paddingLeft: '20px', flex: 1 }}>
               <h2 style={{ fontSize: '1.4rem', margin: 0, fontWeight: 800, color: '#0f172a' }}>
                 {prompt.isHidden && <i className="fas fa-eye-slash" style={{ marginRight: '10px', color: '#64748b', fontSize: '1.1rem' }}></i>}
                 {prompt.name}
@@ -145,8 +145,8 @@ const FullScreenPromptViewer: React.FC<ModalProps> = ({ prompt, onClose, onCopy,
               </div>
             </div>
           </div>
-          <div style={{ display: 'flex', gap: '15px' }}>
-            <button onClick={() => onCopy(content)} style={{ ...viewerCopyBtnStyle, background: activeColor }}>
+          <div className="viewer-actions" style={{ display: 'flex', gap: '15px' }}>
+            <button onClick={() => onCopy(content)} className="viewer-copy-btn" style={{ background: activeColor }}>
               <i className="fas fa-copy"></i> Copy Content
             </button>
           </div>
@@ -865,6 +865,29 @@ const App: React.FC = () => {
         .btn-vault:hover i {
             transform: scale(1.1) rotate(5deg);
             filter: drop-shadow(0 0 5px var(--bg-accent));
+        }
+
+        .viewer-header { padding: 1.5rem 2rem; background: #fff; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); z-index: 10; border-bottom-width: 4px; border-bottom-style: solid; border-radius: 12px 12px 0 0; }
+        .viewer-copy-btn { padding: 12px 24px; border-radius: 12px; border: none; color: #000; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 10px; fontSize: 0.95rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+
+        @media (max-width: 768px) {
+          .main { padding: 1rem; }
+          header { flex-direction: column; align-items: center; text-align: center; gap: 1.5rem; }
+          .header-content { width: 100%; }
+          h1 { font-size: 1.8rem; line-height: 1.2; }
+          .subtitle { font-size: 0.9rem; margin: 0 auto; }
+          .admin-controls { flex-direction: column; width: 100%; gap: 12px; }
+          .btn-vault { width: 100%; justify-content: center; }
+          .search-box { margin: 1rem 0; }
+          .script-grid { grid-template-columns: 1fr; }
+          .modal-content { width: 95% !important; margin: 10px; max-height: 85vh; }
+          
+          /* Viewer Mobile Styles */
+          .viewer-header { flex-direction: column; align-items: flex-start; gap: 15px; padding: 1rem; }
+          .viewer-header > div:first-child { width: 100%; gap: 10px !important; }
+          .viewer-title-group { border-left: none !important; padding-left: 0 !important; margin-left: 5px; }
+          .viewer-actions { width: 100%; }
+          .viewer-copy-btn { width: 100%; justify-content: center; }
         }
       `}</style>
 
