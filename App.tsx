@@ -924,6 +924,15 @@ const App: React.FC = () => {
           <input type="text" placeholder="Search our secure repository…" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
         </div>
 
+        <div style={{ textAlign: 'center', marginTop: '10px', marginBottom: '20px', color: '#64748b', fontSize: '0.9rem', fontWeight: 600 }}>
+          <i className="fas fa-database" style={{ marginRight: '6px' }}></i>
+          {filteredPrompts.length !== prompts.length ? (
+            <span>Showing {filteredPrompts.length} of {prompts.length} Secure Records</span>
+          ) : (
+            <span>{prompts.length} Secure Records Available</span>
+          )}
+        </div>
+
         <div className="script-grid">
           {filteredPrompts.length > 0 ? filteredPrompts.map(p => {
             const activeColor = p.color || getCategoryColor(p.category);
