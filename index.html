@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Vault — Minimalist Edition</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* ---------- 1️⃣ Colour palette ---------- */
+        :root {
+            --bg-primary: #fdfdfd;          /* page background */
+            --bg-secondary: #e0e8ff;        /* cards container */
+            --bg-tertiary: #ffc8dd;         /* modal background */
+            --bg-hover: #c0e6ff;
+            --bg-accent: #ff8c00;            /* accent colour */
+            --bg-accent-dark: #e07a00;
+            --bg-gradient-start: #ff7e5f;
+            --bg-gradient-end: #feb47b;
+            --text-primary: #222222;
+            --text-secondary: #555555;
+            --border: #d8e3f0;
+            --shadow: 0 3px 6px rgba(0,0,0,.1);
+            --shadow-hover: 0 6px 12px rgba(0,0,0,.15);
+            --card-bg: var(--bg-secondary); /* card background */
+            --tag-bg: var(--border);        /* default tag background */
+        }
+
+        /* ========== COLORED TAGS ========== */
+        :root {
+            --tag-jailbreak-bg: rgba(255,107,107,0.15);
+            --tag-jailbreak-text: #d32f2f;
+            --tag-leak-bg: rgba(156,39,176,0.15);
+            --tag-leak-text: #7b1fa2;
+            --tag-grimoire-bg: rgba(106,27,154,0.15);
+            --tag-grimoire-text: #5e1a8c;
+            --tag-super-bg: rgba(76,175,80,0.15);
+            --tag-super-text: #388e3c;
+            --tag-security-bg: rgba(33,150,243,0.15);
+            --tag-security-text: #1565c0;
+            --tag-ultra-bg: rgba(255,235,59,0.15);
+            --tag-ultra-text: #f57f17;
+
+            --desc-jailbreak: #d32f2f;
+            --desc-leak: #7b1fa2;
+            --desc-grimoire: #5e1a8c;
+            --desc-super: #388e3c;
+            --desc-security: #1565c0;
+            --desc-ultra: #f57f17;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { to { opacity: 1; } }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(120%); } to { opacity: 1; transform: translateX(0); } }
+
+        .loading-title {
+            font-size: 2.5rem; font-weight: 700; background: linear-gradient(90deg, var(--bg-accent), #79c0ff);
+            -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 1rem;
+        }
+    </style>
+    <script type="importmap">
+    {
+      "imports": {
+        "lucide-react": "https://esm.sh/lucide-react@0.469.0",
+        "react-dom/": "https://esm.sh/react-dom@^19.0.0/",
+        "react/": "https://esm.sh/react@^19.0.0/",
+        "react": "https://esm.sh/react@^19.0.0",
+        "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2.39.3"
+      }
+    }
+    </script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
